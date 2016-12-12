@@ -93,6 +93,7 @@ conda install conda-build={self.conda_build_version}
 # adding the channel.
 mkdir -p {self.container_staging}/linux-64
 #conda config --add channels file://{self.container_staging}
+conda clean --lock
 
 # The actual building....
 conda build {self.conda_build_args} {self.container_recipe}
