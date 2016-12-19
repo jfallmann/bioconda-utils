@@ -74,7 +74,8 @@ def build(recipe,
     logger.debug('build_args: %s', build_args)
     logger.debug('channel_args: %s', channel_args)
 
-    CONDA_BUILD_CMD = ['conda', 'build']
+#    CONDA_BUILD_CMD = ['conda', 'build']
+    CONDA_BUILD_CMD = ['conda-build']
 
     try:
         # Note we're not sending the contents of os.environ here
