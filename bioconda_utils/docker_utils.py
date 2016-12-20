@@ -95,10 +95,12 @@ mkdir -p {self.container_staging}/linux-64
 #conda config --add channels file://{self.container_staging}
 
 # The actual building....
-conda build {self.conda_build_args} {self.container_recipe}
+#conda build {self.conda_build_args} {self.container_recipe}
+conda-build {self.conda_build_args} {self.container_recipe}
 
 # Identify the output package
-OUTPUT=$(conda build {self.container_recipe} --output)
+#OUTPUT=$(conda build {self.container_recipe} --output)
+OUTPUT=$(conda-build {self.container_recipe} --output)
 
 # Some args to conda-build make it run and exit 0 without creating a package
 # (e.g., -h or --skip-existing), so check to see if there's anything to copy
@@ -178,13 +180,15 @@ def get_host_conda_bld(purge=True):
     res = os.path.dirname(
         os.path.dirname(
             sp.check_output(
-                ['conda', 'build', recipe, '--output'],
+                #                ['conda', 'build', recipe, '--output'],
+                ['conda-build', recipe, '--output'],
                 universal_newlines=True
             ).splitlines()[0]
         )
     )
     if purge:
-        sp.check_call(['conda', 'build', 'purge'])
+        #        sp.check_call(['conda', 'build', 'purge'])
+        sp.check_call(['conda-build', 'purge'])
     return res
 
 
